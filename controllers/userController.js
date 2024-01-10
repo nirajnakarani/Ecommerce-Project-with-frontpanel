@@ -182,14 +182,16 @@ module.exports.multi_cat = async (req, res) => {
 module.exports.single_product = async (req, res) => {
     try {
         var categoryData = await category.find({ isActive: true });
-        var single_product = await product.findById(req.query.product).populate("categoryId").exec()
+        var single_productData = await product.findById(req.query.product).populate("categoryId").exec()
         var recent_productData = await product.find({ isActive: true }).sort({ "_id": -1 }).limit(4)
+        var bg_white = "bg white"
         // console.log(recentProductData)
         if (categoryData) {
             return res.render("user/single_product", {
                 categoryData: categoryData,
                 single_productData: single_productData,
-                recent_productData: recent_productData
+                recent_productData: recent_productData,
+                bg_white: bg_white
             })
         }
         else {
@@ -525,7 +527,7 @@ module.exports.user_loginPage = async (req, res) => {
 
 module.exports.login = async (req, res) => {
     try {
-       
+
         return res.redirect("/")
     }
     catch (err) {
