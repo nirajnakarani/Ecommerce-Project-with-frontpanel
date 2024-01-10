@@ -1,0 +1,42 @@
+<%- include("../admin/header") %>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row mt-3" style="justify-content: center;">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Add Update Category</div>
+                            <hr>
+                            <form action="/admin/subcategory/update_subcategory" method="post">
+                                <input type="hidden" name="editId" value="<%= subcategory.id %>">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                        <select class="form-control" name="categoryId">
+                                            <option value="">-- - --</option>
+                                            <% categoryData.map((v)=>{ %>
+                                                <option value="<%= v.id %>"<%if(v.id==subcategory.categoryId.id){%> <%= "selected" %> <%}%>>
+                                                    <%= v.category_name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sub Category</label>
+                                    <input type="text" class="form-control" placeholder="Enter Your Sub Category"
+                                        name="subcategory_name" value="<%= subcategory.subcategory_name %>">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i>
+                                        Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--End Row-->
+
+            <%- include("../admin/footer") %>

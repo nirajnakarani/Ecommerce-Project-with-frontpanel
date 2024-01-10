@@ -1,0 +1,155 @@
+<!--start overlay-->
+<div class="overlay toggle-menu"></div>
+<!--end overlay-->
+
+</div>
+<!-- End container-fluid-->
+
+</div><!--End content-wrapper-->
+<!--Start Back To Top Button-->
+<a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+<!--End Back To Top Button-->
+
+<!--Start footer-->
+<footer class="footer">
+  <div class="container">
+    <div class="text-center">
+      Copyright © 2018 Dashtreme Admin
+    </div>
+  </div>
+</footer>
+<!--End footer-->
+
+<!--start color switcher-->
+<div class="right-sidebar">
+  <div class="switcher-icon">
+    <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
+  </div>
+  <div class="right-sidebar-content">
+
+    <p class="mb-0">Gaussion Texture</p>
+    <hr>
+
+    <ul class="switcher">
+      <li id="theme1"></li>
+      <li id="theme2"></li>
+      <li id="theme3"></li>
+      <li id="theme4"></li>
+      <li id="theme5"></li>
+      <li id="theme6"></li>
+    </ul>
+
+    <p class="mb-0">Gradient Background</p>
+    <hr>
+
+    <ul class="switcher">
+      <li id="theme7"></li>
+      <li id="theme8"></li>
+      <li id="theme9"></li>
+      <li id="theme10"></li>
+      <li id="theme11"></li>
+      <li id="theme12"></li>
+      <li id="theme13"></li>
+      <li id="theme14"></li>
+      <li id="theme15"></li>
+    </ul>
+
+  </div>
+</div>
+<!--end color switcher-->
+
+</div><!--End wrapper-->
+
+<!-- Bootstrap core JavaScript-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- simplebar js -->
+<script src="/plugins/simplebar/js/simplebar.js"></script>
+<!-- sidebar-menu js -->
+<script src="/js/sidebar-menu.js"></script>
+<!-- loader scripts -->
+<script src="/js/jquery.loading-indicator.js"></script>
+<!-- Custom scripts -->
+<script src="/js/app-script.js"></script>
+<!-- Chart js -->
+
+<script src="/plugins/Chart.js/Chart.min.js"></script>
+
+<!-- Index js -->
+<script src="/js/index.js"></script>
+
+
+</body>
+
+</html>
+
+<script>
+
+  function getsubcat() {
+
+    var category = document.getElementById("category").value;
+    $.ajax({
+      url: "/admin/subcategory/getsubcat",
+      method: "post",
+      data: {
+        categoryId: category
+      },
+      success: function (res) {
+        $("#subcategory").html(res)
+      }
+    })
+  }
+
+  function getextracat() {
+    var subcategory = document.getElementById("subcategory").value;
+    $.ajax({
+      url: "/admin/extracategory/getextracat",
+      method: "post",
+      data: {
+        subcategoryId: subcategory
+      },
+      success: function (res) {
+        $("#extracategory").html(res)
+      }
+    })
+  }
+
+
+  function getbrandType() {
+    var extracategory = document.getElementById("extracategory").value;
+    $.ajax({
+      url: "/admin/extracategory/getbrandType",
+      method: "post",
+      data: {
+        extracategoryId: extracategory
+      },
+      success: function (res) {
+        $("#brand").html(res[0])
+        $("#type").html(res[1])
+      }
+    })
+  }
+
+
+  function deleteSpecificImg(src, id, i, index) {
+    // var src = src;
+    // var id = id;
+    var deleteSpecificImg = confirm("Are you sure delete ?")
+    if (deleteSpecificImg) {
+      $.ajax({
+        url: "/admin/product/deleteSpecificImg",
+        method: "post",
+        data: {
+          src: src,
+          id: id,
+          index: i
+        },
+        success: function (res) {
+          $("#multi_img" + index).html(res)
+        }
+      })
+    }
+  }
+</script>

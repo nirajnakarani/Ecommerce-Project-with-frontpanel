@@ -1,0 +1,168 @@
+<%- include("header") %>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="view-search-bar-main">
+                                <h5 class="card-title">View Admin</h5>
+
+                                <div class="view-search-bar" style="display: flex;">
+                                    <form class="view-search-bar">
+                                        <label for="search">Search</label>
+                                        <input required="" autocomplete="off" class="input" id="search" name="search"
+                                            value="<%= search %>">
+                                        <span class="caret"></span>
+                                    </form>
+                                    <a class="button" href="/admin/view_admin">Cancel</a>
+                                </div>
+                            </div>
+
+                            <form action="/admin/delete_many" method="post">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    <div class="main-check">
+                                                        <div class="check">
+                                                            <input type="checkbox" id="checkAll" />
+                                                            <label for="checkAll">
+                                                                <div></div>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <button type="submit" class="delete-button">
+                                                                <div class="icon">
+                                                                    <svg class="top">
+                                                                        <use xlink:href="#top">
+                                                                    </svg>
+                                                                    <svg class="bottom">
+                                                                        <use xlink:href="#bottom">
+                                                                    </svg>
+                                                                </div>
+                                                                <span>Delete</span>
+                                                            </button>
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                style="display: none;">
+                                                                <symbol xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 24 24" id="top">
+                                                                    <path
+                                                                        d="M15,4 C15.5522847,4 16,4.44771525 16,5 L16,6 L18.25,6 C18.6642136,6 19,6.33578644 19,6.75 C19,7.16421356 18.6642136,7.5 18.25,7.5 L5.75,7.5 C5.33578644,7.5 5,7.16421356 5,6.75 C5,6.33578644 5.33578644,6 5.75,6 L8,6 L8,5 C8,4.44771525 8.44771525,4 9,4 L15,4 Z M14,5.25 L10,5.25 C9.72385763,5.25 9.5,5.47385763 9.5,5.75 C9.5,5.99545989 9.67687516,6.19960837 9.91012437,6.24194433 L10,6.25 L14,6.25 C14.2761424,6.25 14.5,6.02614237 14.5,5.75 C14.5,5.50454011 14.3231248,5.30039163 14.0898756,5.25805567 L14,5.25 Z">
+                                                                    </path>
+                                                                </symbol>
+                                                                <symbol xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 24 24" id="bottom">
+                                                                    <path
+                                                                        d="M16.9535129,8 C17.4663488,8 17.8890201,8.38604019 17.9467852,8.88337887 L17.953255,9.02270969 L17.953255,9.02270969 L17.5309272,18.3196017 C17.5119599,18.7374363 17.2349366,19.0993109 16.8365446,19.2267053 C15.2243631,19.7422351 13.6121815,20 12,20 C10.3878264,20 8.77565288,19.7422377 7.16347932,19.226713 C6.76508717,19.0993333 6.48806648,18.7374627 6.46907425,18.3196335 L6.04751853,9.04540766 C6.02423185,8.53310079 6.39068134,8.09333626 6.88488406,8.01304774 L7.02377738,8.0002579 L16.9535129,8 Z M9.75,10.5 C9.37030423,10.5 9.05650904,10.719453 9.00684662,11.0041785 L9,11.0833333 L9,16.9166667 C9,17.2388328 9.33578644,17.5 9.75,17.5 C10.1296958,17.5 10.443491,17.280547 10.4931534,16.9958215 L10.5,16.9166667 L10.5,11.0833333 C10.5,10.7611672 10.1642136,10.5 9.75,10.5 Z M14.25,10.5 C13.8703042,10.5 13.556509,10.719453 13.5068466,11.0041785 L13.5,11.0833333 L13.5,16.9166667 C13.5,17.2388328 13.8357864,17.5 14.25,17.5 C14.6296958,17.5 14.943491,17.280547 14.9931534,16.9958215 L15,16.9166667 L15,11.0833333 C15,10.7611672 14.6642136,10.5 14.25,10.5 Z">
+                                                                    </path>
+                                                                </symbol>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">City</th>
+                                                <th scope="col">Hobby</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(var admin of adminData){ %>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <div class="check">
+                                                            <input type="checkbox" name="deleteAll[]"
+                                                                id="<%= admin.id %>" class="checkItem"
+                                                                value="<%= admin.id %>" />
+                                                            <label for="<%= admin.id %>">
+                                                                <div></div>
+                                                            </label>
+                                                        </div>
+                                                    </th>
+                                                    <td>
+                                                        <%= admin.name %>
+                                                    </td>
+                                                    <td>
+                                                        <%= admin.email %>
+                                                    </td>
+                                                    <td>
+                                                        <%= admin.gender %>
+                                                    </td>
+                                                    <td>
+                                                        <%= admin.city %>
+                                                    </td>
+                                                    <td>
+                                                        <%= admin.hobby %>
+                                                    </td>
+                                                    <td>
+                                                        <%= admin.description %>
+                                                    </td>
+                                                    <td>
+                                                        <div style="width: 50px;height: 50px;">
+                                                            <img src="<%= admin.admin_img %>" alt="" height="50"
+                                                                width="50">
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <%if(admin.isActive){ %>
+                                                            <a href="/admin/set_deactive/?id=<%= admin.id %>"
+                                                                class="btn btn-success">Active</a>
+
+                                                            <% }else{ %>
+                                                                <a href="/admin/set_active/?id=<%= admin.id %>"
+                                                                    class="btn btn-danger">Deactive</a>
+                                                                <% } %>
+
+                                                    </td>
+                                                    <td>
+                                                        <div class="table-data-feature">
+                                                            <a href="/admin/edit_admin/?id=<%= admin.id %>" class="item"
+                                                                data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                <i class="zmdi zmdi-edit"></i>
+
+                                                            </a>
+                                                            <a href="/admin/delete_admin/?id=<%= admin.id %>"
+                                                                class="item" data-toggle="tooltip" data-placement="top"
+                                                                title="Delete">
+                                                                <i class="zmdi zmdi-delete"></i>
+
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+
+                            <ul class="pagination justify-content-center" style="margin-top: 30px;">
+                                <%for(var i=0;i<totalDocument;i++){%>
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page=<%= i %>&seach=<%= search %>">
+                                            <%= i+1 %>
+                                        </a></li>
+                                    <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!--End Row-->
+
+
+
+
+            <%- include("footer") %>

@@ -1,0 +1,363 @@
+<%- include("header")%>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row mt-3">
+                <div class="col-lg-4">
+                    <div class="card profile-card-2">
+                        <div class="card-img-block">
+                            <img class="img-fluid" src="<%= locals.user.admin_img %>" alt="Card image cap">
+                        </div>
+                        <div class="card-body pt-5">
+                            <img src="<%= locals.user.admin_img %>" alt="profile-image" class="profile">
+                            <h5 class="card-title">
+                                <%= locals.user.name %>
+                            </h5>
+                            <p class="card-text">
+                                <%= locals.user.description %>
+                            </p>
+                            <div class="icon-block">
+                                <a href="javascript:void();"><i class="fa-brands fa-facebook"></i></a>
+                                <a href="javascript:void();"> <i class="fa-brands fa-twitter"></i></a>
+                                <a href="javascript:void();"> <i class="fa-brands fa-google-plus-g"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="card-body border-top border-light">
+                            <div class="media align-items-center">
+                                <div>
+                                    <img src="/images/timeline/html5.svg" class="skill-img" alt="skill img">
+                                </div>
+                                <div class="media-body text-left ml-3">
+                                    <div class="progress-wrapper">
+                                        <p>HTML5 <span class="float-right">65%</span></p>
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar" style="width:65%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="media align-items-center">
+                                <div><img src="/images/timeline/bootstrap-4.svg" class="skill-img" alt="skill img">
+                                </div>
+                                <div class="media-body text-left ml-3">
+                                    <div class="progress-wrapper">
+                                        <p>Bootstrap 4 <span class="float-right">50%</span></p>
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar" style="width:50%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="media align-items-center">
+                                <div><img src="/images/timeline/angular-icon.svg" class="skill-img" alt="skill img">
+                                </div>
+                                <div class="media-body text-left ml-3">
+                                    <div class="progress-wrapper">
+                                        <p>AngularJS <span class="float-right">70%</span></p>
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar" style="width:70%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="media align-items-center">
+                                <div><img src="/images/timeline/react.svg" class="skill-img" alt="skill img">
+                                </div>
+                                <div class="media-body text-left ml-3">
+                                    <div class="progress-wrapper">
+                                        <p>React JS <span class="float-right">35%</span></p>
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar" style="width:35%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#profile" data-toggle="pill"
+                                        class="nav-link"><i class="icon-user"></i> <span
+                                            class="hidden-xs">Profile</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#messages" data-toggle="pill"
+                                        class="nav-link"><i class="icon-envelope-open"></i> <span
+                                            class="hidden-xs">Messages</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#edit" data-toggle="pill"
+                                        class="nav-link"><i class="icon-note"></i> <span
+                                            class="hidden-xs">Edit</span></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-3">
+                                <div class="tab-pane" id="profile">
+                                    <h5 class="mb-3">User Profile</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>About</h6>
+                                            <p>
+                                                <b>Gender : </b>
+                                                <%= locals.user.gender %>
+                                                    <br>
+                                                    <b>City : </b>
+                                                    <%= locals.user.city %>
+                                            </p>
+                                            <h6>Hobbies</h6>
+                                            <p>
+                                                <%= locals.user.hobby %>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Recent badges</h6>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">html5</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">react</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">codeply</a>
+                                            <a href="javascript:void();"
+                                                class="badge badge-dark badge-pill">angularjs</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">css3</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">jquery</a>
+                                            <a href="javascript:void();"
+                                                class="badge badge-dark badge-pill">bootstrap</a>
+                                            <a href="javascript:void();"
+                                                class="badge badge-dark badge-pill">responsive-design</a>
+                                            <hr>
+                                            <span class="badge badge-primary"><i class="fa fa-user"></i> 900
+                                                Followers</span>
+                                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h5 class="mt-2 mb-3"><span
+                                                    class="fa fa-clock-o ion-clock float-right"></span> Recent Activity
+                                            </h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <strong>Abby</strong> joined ACME Project Team in
+                                                                <strong>`Collaboration`</strong>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong>Gary</strong> deleted My Board1 in
+                                                                <strong>`Discussions`</strong>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong>Kensington</strong> deleted MyBoard3 in
+                                                                <strong>`Discussions`</strong>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong>John</strong> deleted My Board1 in
+                                                                <strong>`Discussions`</strong>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong>Skell</strong> deleted his post Look at Why this
+                                                                is.. in <strong>`Discussions`</strong>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/row-->
+                                </div>
+                                <div class="tab-pane" id="messages">
+                                    <div class="alert alert-info alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <div class="alert-icon">
+                                            <i class="icon-info"></i>
+                                        </div>
+                                        <div class="alert-message">
+                                            <span><strong>Info!</strong> Lorem Ipsum is simply dummy text.</span>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="float-right font-weight-bold">3 hrs ago</span> Here
+                                                        is your a link to the latest summary report from the..
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="float-right font-weight-bold">Yesterday</span>
+                                                        There has been a request on your account since that was..
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="float-right font-weight-bold">9/10</span> Porttitor
+                                                        vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia
+                                                        rhoncus.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="float-right font-weight-bold">9/4</span> Vestibulum
+                                                        tincidunt ullamcorper eros eget luctus.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="float-right font-weight-bold">9/4</span>
+                                                        Maxamillion ais the fix for tibulum tincidunt ullamcorper eros.
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="edit">
+                                    <form action="/admin/update_admin" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="editId" value="<%= locals.user.id %>">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter Your Name"
+                                                name="name" value="<%= locals.user.name %>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Enter Your Email Address" name="email"
+                                                value="<%= locals.user.email %>">
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="text" class="form-control" placeholder="Enter Password"
+                                                name="password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Confirm Password</label>
+                                            <input type="text" class="form-control" placeholder="Confirm Password"
+                                                name="confirm_pass">
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea name="description" class="form-control"
+                                                placeholder="Enter Description"><%= locals.user.description %></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <%var city=["surat","ahemadabad","rajkot","vadodara"];%>
+                                                <select class="form-control" name="city">
+                                                    <option value="">-- - --</option>
+                                                    <% city.map((v)=>{ %>
+                                                        <option value="<%= v %>" <%if(v==locals.user.city){%>
+                                                            <%="selected"%>
+                                                                <%}%>>
+                                                                    <%= v %>
+                                                        </option>
+                                                        <% }) %>
+                                                </select>
+                                        </div>
+
+                                        <div class="form-group py-2">
+                                            <label>Gender</label>
+                                            <div style="display: flex;">
+                                                <div class="icheck-material-white">
+                                                    <input type="radio" id="user-radio1" name="gender" value="male"
+                                                        <%if(locals.user.gender=="male" ){%>
+                                                    <%="checked"%>
+                                                        <%}%>>
+
+                                                            <label for="user-radio1">Male</label>
+                                                </div>
+                                                <div class="icheck-material-white" style="margin-left: 30px;">
+                                                    <input type="radio" id="user-radio2" name="gender" value="female"
+                                                        <%if(locals.user.gender=="female" ){%>
+                                                    <%="checked"%>
+                                                        <%}%>>
+
+                                                            <label for="user-radio2">Female</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group py-2">
+                                            <label>Hobby</label>
+                                            <div style="display: flex;">
+                                                <div class="icheck-material-white">
+                                                    <input type="checkbox" id="user-checkbox1" name="hobby"
+                                                        value="foody" <%if(locals.user.hobby.includes("foody")){%>
+                                                    <%="checked"%>
+                                                        <%}%>>
+                                                            <label for="user-checkbox1">Foody</label>
+                                                </div>
+                                                <div class="icheck-material-white" style="margin-left: 30px;">
+                                                    <input type="checkbox" id="user-checkbox2" name="hobby"
+                                                        value="adventure"
+                                                        <%if(locals.user.hobby.includes("adventure")){%>
+                                                    <%="checked"%>
+                                                        <%}%>>
+                                                            <label for="user-checkbox2">Adventure</label>
+                                                </div>
+                                                <div class="icheck-material-white" style="margin-left: 30px;">
+                                                    <input type="checkbox" id="user-checkbox3" name="hobby"
+                                                        value="travelling"
+                                                        <%if(locals.user.hobby.includes("travelling")){%>
+                                                    <%="checked"%>
+                                                        <%}%>>
+                                                            <label for="user-checkbox3">Travelling</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Image</label>
+                                            <div style="display: flex;">
+                                                <label class="filelabel">
+                                                    <i class="fa fa-paperclip">
+                                                    </i>
+                                                    <span class="title">
+                                                        Add Img
+                                                    </span>
+                                                    <input class="FileUpload1" id="FileInput" name="admin_img"
+                                                        type="file" />
+                                                </label>
+                                                <div style="width: 100px; height: 100px;margin-left: 30px;">
+                                                    <img src="<%= locals.user.admin_img %>" alt="" height="100"
+                                                        width="100" style="border-radius: 3px;">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i>
+                                                Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <%- include("footer")%>

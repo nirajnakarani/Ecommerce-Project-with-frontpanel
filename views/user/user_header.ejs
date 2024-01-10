@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Winter</title>
+    <link rel="icon" href="/user_assets/img/">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/animate.css">
+
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="/css/all.css">
+
+    <link rel="stylesheet" href="/css/nice-select.css">
+
+    <link rel="stylesheet" href="/css/flaticon.css">
+
+    <link rel="stylesheet" href="/css/themify-icons.css">
+
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/css/slick.css">
+
+    <link rel="stylesheet" href="/css/slick-theme.css">
+
+    <link rel="stylesheet" href="/css/price_rangs.css">
+
+    <link rel="stylesheet" href="/css/lightslider.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script
+        nonce="dee97ea1-cff9-4a5d-ae13-9357a52a2571">(function (w, d) { !function (dp, dq, dr, ds) { dp[dr] = dp[dr] || {}; dp[dr].executed = []; dp.zaraz = { deferred: [], listeners: [] }; dp.zaraz.q = []; dp.zaraz._f = function (dt) { return async function () { var du = Array.prototype.slice.call(arguments); dp.zaraz.q.push({ m: dt, a: du }) } }; for (const dv of ["track", "set", "debug"]) dp.zaraz[dv] = dp.zaraz._f(dv); dp.zaraz.init = () => { var dw = dq.getElementsByTagName(ds)[0], dx = dq.createElement(ds), dy = dq.getElementsByTagName("title")[0]; dy && (dp[dr].t = dq.getElementsByTagName("title")[0].text); dp[dr].x = Math.random(); dp[dr].w = dp.screen.width; dp[dr].h = dp.screen.height; dp[dr].j = dp.innerHeight; dp[dr].e = dp.innerWidth; dp[dr].l = dp.location.href; dp[dr].r = dq.referrer; dp[dr].k = dp.screen.colorDepth; dp[dr].n = dq.characterSet; dp[dr].o = (new Date).getTimezoneOffset(); if (dp.dataLayer) for (const dC of Object.entries(Object.entries(dataLayer).reduce(((dD, dE) => ({ ...dD[1], ...dE[1] })), {}))) zaraz.set(dC[0], dC[1], { scope: "page" }); dp[dr].q = []; for (; dp.zaraz.q.length;) { const dF = dp.zaraz.q.shift(); dp[dr].q.push(dF) } dx.defer = !0; for (const dG of [localStorage, sessionStorage]) Object.keys(dG || {}).filter((dI => dI.startsWith("_zaraz_"))).forEach((dH => { try { dp[dr]["z_" + dH.slice(7)] = JSON.parse(dG.getItem(dH)) } catch { dp[dr]["z_" + dH.slice(7)] = dG.getItem(dH) } })); dx.referrerPolicy = "origin"; dx.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(dp[dr]))); dw.parentNode.insertBefore(dx, dw) };["complete", "interactive"].includes(dq.readyState) ? zaraz.init() : dp.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
+</head>
+
+<%if(bg_white!=""){%>
+
+    <body class="bg-white">
+
+        <%}else{%>
+
+            <body>
+                <%}%>
+
+                    <header class="main_menu home_menu">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-lg-11">
+                                    <nav class="navbar navbar-expand-lg navbar-light">
+                                        <a class="navbar-brand" href="/"> <img src="/img/logo.png" alt="logo"> </a>
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                            aria-expanded="false" aria-label="Toggle navigation">
+                                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                                        </button>
+                                        <div class="collapse navbar-collapse main-menu-item"
+                                            id="navbarSupportedContent">
+                                            <ul class="navbar-nav">
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/">Home</a>
+                                                </li>
+                                                <%for(var cat of categoryData){%>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="/single_category/?cat=<%= cat.id %>">
+                                                            <%=cat.category_name%>
+                                                        </a>
+                                                    </li>
+                                                    <%}%>
+
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="contact.html">Contact</a>
+                                                        </li>
+                                            </ul>
+                                        </div>
+                                        <div class="hearer_icon d-flex">
+                                            <div class="dropdown cart">
+                                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="ti-bag"></i>
+                                                </a>
+
+                                            </div>
+                                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+                                            <div style="margin-left: 30px;">
+                                                <%if(locals.userData){%>
+                                                    <span>
+                                                        <%=locals.userData.name%>
+                                                    </span>
+                                                    <%}else{%>
+                                                        <a href="/user_loginPage">Login</a>
+                                                        <%}%>
+                                            </div>
+
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search_input" id="search_input_box">
+                            <div class="container ">
+                                <form class="d-flex justify-content-between search-inner">
+                                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                                    <button type="submit" class="btn"></button>
+                                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                                </form>
+                            </div>
+                        </div>
+                    </header>

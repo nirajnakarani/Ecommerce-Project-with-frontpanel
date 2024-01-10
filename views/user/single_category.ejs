@@ -1,0 +1,312 @@
+<%- include("user_header") %>
+
+
+
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <p>Home / Category</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="cat_product_area section_padding border_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+                        <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
+                            <div class="l_w_title">
+                                <h3>Browse Sub Categories</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+                                    <%subCategoryData.map((v)=>{%>
+                                        <li class="sub-menu">
+                                            <a href="javascript:void(0)" class=" d-flex justify-content-between">
+                                                <%= v.subcategory_name %>
+                                                    <div class="right ti-plus"></div>
+                                            </a>
+                                            <ul>
+                                                <%extraCategoryData.map((v1)=>{%>
+                                                    <%if(v.id== v1.subcategoryId){%>
+                                                        <li>
+                                                            <a
+                                                                href="/multi_cat/?cat=<%=single_category.id%>&subcat=<%=v.id%>&extracat=<%=v1.id%>">
+                                                                <%= v1.extracategory_name %>
+                                                            </a>
+                                                        </li>
+                                                        <%}})%>
+
+                                            </ul>
+                                        </li>
+                                        <%})%>
+                                </ul>
+                            </div>
+                        </aside>
+                        <aside class=" left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
+                            <div class="l_w_title">
+                                <h3>Price Filter</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <div class="range-slider">
+                                    <span style="display: flex;justify-content: center;">
+
+                                        <span>
+                                            Price :
+                                            <input type="number" value="<%=min%>" min="<%=min%>" max="<%=max%>"
+                                                id="from" readonly/>
+                                            To
+                                        </span>
+
+                                        <input type="number" value="<%=max%>" min="<%=min%>" max="<%=max%>" id="to" readonly/>
+                                    </span>
+                                    <input value="<%=min%>" min="<%=min%>" max="<%=max%>" type="range"
+                                        onchange="return getCatPrice()" />
+                                    <input value="<%=max%>" min="<%=min%>" max="<%=max%>" type="range"
+                                        onchange="return getCatPrice()" />
+                                </div>
+                            </div>
+                        </aside>
+                        <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
+                            <div class="l_w_title">
+                                <h3>Product filters</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+                                    <p>Brands</p>
+                                    <%brand_list.map((v)=>{%>
+                                        <li>
+                                            <input type="checkbox" aria-label="Radio button for following text input"
+                                                value="<%=v.id%>" name="brands" onclick="getCatBrand()">
+                                            <a href="javascript:vod(0)">
+                                                <%=v.brand_name%>
+                                            </a>
+                                        </li>
+                                        <%})%>
+
+                                </ul>
+                                <ul class="list">
+                                    <p>Type</p>
+                                    <%type_list.map((v,i)=>{%>
+                                        <li>
+                                            <input type="checkbox" aria-label="Radio button for following text input"
+                                                value="<%=v.id%>" name="types" onclick="getCatType()">
+                                            <a href="javascript:void(0)">
+                                                <%=v.type_name%>
+                                            </a>
+                                        </li>
+                                        <%})%>
+                                </ul>
+                            </div>
+                        </aside>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu product_bar_item">
+                                    <h2>
+                                        <%= single_category.category_name %> 
+                                        (<span id="ajaxCatChangelength"><%=productData.length%></span>)
+                                    </h2>
+                                </div>
+                                <div class="product_top_bar_iner product_bar_item d-flex">
+                                    <div class="product_bar_single">
+                                        <select class="wide">
+                                            <option data-display="Default sorting">Default sorting</option>
+                                            <option value="1">Some option</option>
+                                            <option value="2">Another option</option>
+                                            <option value="3">Potato</option>
+                                        </select>
+                                    </div>
+                                    <div class="product_bar_single">
+                                        <select>
+                                            <option data-display="Show 12">Show 12</option>
+                                            <option value="1">Show 20</option>
+                                            <option value="2">Show 30</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="row" id="ajaxCatChange">
+                                <%productData.map((v)=>{%>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="single_category_product">
+                                            <div class="single_category_img">
+                                                <a href="/single_product/?product=<%=v.id%>">
+                                                    <img src="<%=v.single_img%>" alt height="200"
+                                                        style="object-fit: cover;">
+                                                </a>
+                                                <div class="category_social_icon">
+                                                    <ul>
+                                                        <li><a href="#"><i class="ti-heart"></i></a></li>
+                                                        <li><a href="#"><i class="ti-bag"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="category_product_text">
+                                                    <a href="/single_product/?product=<%=v.id%>">
+                                                        <h5>
+                                                            <%=v.title%>
+                                                        </h5>
+                                                    </a>
+                                                    <p>₹ <%=v.price%>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%})%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 text-center">
+                            <a href="#" class="btn_2">More Items</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="shipping_details section_padding border_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="/img/icon/icon_1.png" alt>
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="/img/icon/icon_2.png" alt>
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="/img/icon/icon_3.png" alt>
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="/img/icon/icon_4.png" alt>
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="instagram_photo">
+        <div class="container-fluid>
+                  <div class=" row">
+            <div class="col-lg-12">
+                <div class="instagram_photo_iner">
+                    <div class="single_instgram_photo">
+                        <img src="/img/instagram/inst_1.png" alt>
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="/img/instagram/inst_2.png" alt>
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="/img/instagram/inst_3.png" alt>
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="/img/instagram/inst_4.png" alt>
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                    <div class="single_instgram_photo">
+                        <img src="/img/instagram/inst_5.png" alt>
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+    <%- include("user_footer") %>
+        <script>
+
+            function getCatPrice() {
+                var from = document.getElementById("from").value;
+                var to = document.getElementById("to").value;
+                $.ajax({
+                    url: "/change_catprice",
+                    method: "post",
+                    data: {
+                        from: from,
+                        to: to,
+                        categoryId: "<%=categoryId%>",
+                    },
+                    success: function (res) {
+                        $("#ajaxCatChangelength").html(res[0])
+                        $("#ajaxCatChange").html(res[1])
+                    }
+                })
+            }
+
+            function getCatBrand() {
+                var brandId = []
+                $("input:checkbox[name=brands]:checked").each(function () {
+                    brandId.push($(this).val());
+                });
+                $.ajax({
+                    url: "/change_catbrand",
+                    method: "post",
+                    data: {
+                        categoryId: "<%=categoryId%>",
+                        brandId: brandId
+                    },
+                    success: function (res) {
+                        $("#ajaxCatChangelength").html(res[0])
+                        $("#ajaxCatChange").html(res[1])
+                    }
+                })
+            }
+
+            function getCatType() {
+                var typeId = []
+                $("input:checkbox[name=types]:checked").each(function () {
+                    typeId.push($(this).val());
+                });
+                console.log(typeId)
+                $.ajax({
+                    url: "/change_cattype",
+                    method: "post",
+                    data: {
+                        categoryId: "<%=categoryId%>",
+                        typeId: typeId
+                    },
+                    success: function (res) {
+                        $("#ajaxCatChangelength").html(res[0])
+                        $("#ajaxCatChange").html(res[1])
+                    }
+                })
+            }
+
+        </script>

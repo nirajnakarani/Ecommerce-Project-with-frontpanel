@@ -1,0 +1,466 @@
+<%- include("header") %>
+
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <!--Start Dashboard Content-->
+
+            <div class="card mt-3">
+                <div class="card-content">
+                    <div class="row row-group m-0">
+                        <div class="col-12 col-lg-6 col-xl-2 border-light">
+                            <a href="/admin/category/view_category">
+                                <div class="card-body">
+                                    <h5 class="text-white mb-0">
+                                        <%= categoryData.length %> <span class="float-right"><i
+                                                    class="fa-solid fa-layer-group"></i></span>
+                                    </h5>
+                                    <div class="progress my-3" style="height:3px;">
+                                        <div class="progress-bar" style="width:55%"></div>
+                                    </div>
+                                    <p class="mb-0 text-white small-font text-center">Category </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 border-light">
+                            <a href="/admin/subcategory/view_subcategory">
+                                <div class="card-body">
+                                    <h5 class="text-white mb-0">
+                                        <%= subcategoryData.length %> <span class="float-right"><i
+                                                    class="fa fa-usd"></i></span>
+                                    </h5>
+                                    <div class="progress my-3" style="height:3px;">
+                                        <div class="progress-bar" style="width:55%"></div>
+                                    </div>
+                                    <p class="mb-0 text-white small-font text-center">Sub Category</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 border-light">
+                            <a href="/admin/extracategory/view_extracategory">
+                                <div class="card-body">
+                                    <h5 class="text-white mb-0">
+                                        <%= extracategoryData.length %> <span class="float-right"><i
+                                                    class="fa fa-eye"></i></span>
+                                    </h5>
+                                    <div class="progress my-3" style="height:3px;">
+                                        <div class="progress-bar" style="width:55%"></div>
+                                    </div>
+                                    <p class="mb-0 text-white small-font text-center">Extra Category </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 border-light">
+                            <a href="/admin/brand/view_brand">
+                                <div class="card-body">
+                                    <h5 class="text-white mb-0">
+                                        <%= brandData.length %> <span class="float-right"><i
+                                                    class="fa-solid fa-copyright"></i></span>
+                                    </h5>
+                                    <div class="progress my-3" style="height:3px;">
+                                        <div class="progress-bar" style="width:55%"></div>
+                                    </div>
+                                    <p class="mb-0 text-white small-font text-center">Brand </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 border-light">
+                            <a href="/admin/type/view_type">
+                                <div class="card-body">
+                                    <h5 class="text-white mb-0">
+                                        <%= typeData.length %> <span class="float-right"><i
+                                                    class="fa-brands fa-envira"></i></span>
+                                    </h5>
+                                    <div class="progress my-3" style="height:3px;">
+                                        <div class="progress-bar" style="width:55%"></div>
+                                    </div>
+                                    <p class="mb-0 text-white small-font text-center">Type</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-2 border-light">
+                            <a href="/admin/product/view_product">
+                                <div class="card-body">
+                                    <h5 class="text-white mb-0">
+                                        <%= productData.length %> <span class="float-right"><i
+                                                    class="fa fa-shopping-cart"></i></span>
+                                    </h5>
+                                    <div class="progress my-3" style="height:3px;">
+                                        <div class="progress-bar" style="width:55%"></div>
+                                    </div>
+                                    <p class="mb-0 text-white small-font text-center">Product</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%if(searchproductData!=""){%>
+                <div class="row mt-3">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="view-search-bar-main">
+                                    <h5 class="card-title">View Product</h5>
+                                </div>
+
+                                <form action="/admin/product/delete_many" method="post">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">
+                                                        <div class="main-check">
+                                                            <div class="check">
+                                                                <input type="checkbox" id="checkAll" />
+                                                                <label for="checkAll">
+                                                                    <div></div>
+                                                                </label>
+                                                            </div>
+                                                            <div>
+                                                                <button type="submit" class="delete-button">
+                                                                    <div class="icon">
+                                                                        <svg class="top">
+                                                                            <use xlink:href="#top">
+                                                                        </svg>
+                                                                        <svg class="bottom">
+                                                                            <use xlink:href="#bottom">
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span>Delete</span>
+                                                                </button>
+
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    style="display: none;">
+                                                                    <symbol xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 24 24" id="top">
+                                                                        <path
+                                                                            d="M15,4 C15.5522847,4 16,4.44771525 16,5 L16,6 L18.25,6 C18.6642136,6 19,6.33578644 19,6.75 C19,7.16421356 18.6642136,7.5 18.25,7.5 L5.75,7.5 C5.33578644,7.5 5,7.16421356 5,6.75 C5,6.33578644 5.33578644,6 5.75,6 L8,6 L8,5 C8,4.44771525 8.44771525,4 9,4 L15,4 Z M14,5.25 L10,5.25 C9.72385763,5.25 9.5,5.47385763 9.5,5.75 C9.5,5.99545989 9.67687516,6.19960837 9.91012437,6.24194433 L10,6.25 L14,6.25 C14.2761424,6.25 14.5,6.02614237 14.5,5.75 C14.5,5.50454011 14.3231248,5.30039163 14.0898756,5.25805567 L14,5.25 Z">
+                                                                        </path>
+                                                                    </symbol>
+                                                                    <symbol xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 24 24" id="bottom">
+                                                                        <path
+                                                                            d="M16.9535129,8 C17.4663488,8 17.8890201,8.38604019 17.9467852,8.88337887 L17.953255,9.02270969 L17.953255,9.02270969 L17.5309272,18.3196017 C17.5119599,18.7374363 17.2349366,19.0993109 16.8365446,19.2267053 C15.2243631,19.7422351 13.6121815,20 12,20 C10.3878264,20 8.77565288,19.7422377 7.16347932,19.226713 C6.76508717,19.0993333 6.48806648,18.7374627 6.46907425,18.3196335 L6.04751853,9.04540766 C6.02423185,8.53310079 6.39068134,8.09333626 6.88488406,8.01304774 L7.02377738,8.0002579 L16.9535129,8 Z M9.75,10.5 C9.37030423,10.5 9.05650904,10.719453 9.00684662,11.0041785 L9,11.0833333 L9,16.9166667 C9,17.2388328 9.33578644,17.5 9.75,17.5 C10.1296958,17.5 10.443491,17.280547 10.4931534,16.9958215 L10.5,16.9166667 L10.5,11.0833333 C10.5,10.7611672 10.1642136,10.5 9.75,10.5 Z M14.25,10.5 C13.8703042,10.5 13.556509,10.719453 13.5068466,11.0041785 L13.5,11.0833333 L13.5,16.9166667 C13.5,17.2388328 13.8357864,17.5 14.25,17.5 C14.6296958,17.5 14.943491,17.280547 14.9931534,16.9958215 L15,16.9166667 L15,11.0833333 C15,10.7611672 14.6642136,10.5 14.25,10.5 Z">
+                                                                        </path>
+                                                                    </symbol>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Sub Category</th>
+                                                    <th scope="col">Etxtra Category</th>
+                                                    <th scope="col">Brand</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Title</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Old Price</th>
+                                                    <th scope="col">Color</th>
+                                                    <th scope="col">Size</th>
+                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Single Img</th>
+                                                    <th scope="col">Multi Img</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% var index=0; for(var product of searchproductData){ %>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <div class="check">
+                                                                <input type="checkbox" name="deleteAll[]"
+                                                                    id="<%= product.id %>" class="checkItem"
+                                                                    value="<%= product.id %>" />
+                                                                <label for="<%= product.id %>">
+                                                                    <div></div>
+                                                                </label>
+                                                            </div>
+                                                        </th>
+                                                        <td>
+                                                            <%= product.categoryId.category_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.subcategoryId.subcategory_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.extracategoryId.extracategory_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.brandId.brand_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.typeId.type_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.title %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.price %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.old_price %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.color %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.size %>
+                                                        </td>
+                                                        <td>
+                                                            <%= product.description %>
+                                                        </td>
+
+                                                        <td>
+                                                            <div style="width: 50px;height: 50px;">
+                                                                <img src="<%= product.single_img %>" alt="" height="50"
+                                                                    width="50">
+                                                            </div>
+
+                                                        </td>
+                                                        <td>
+                                                            <div style="width: 120px;height: auto; display: flex; flex-wrap: wrap;"
+                                                                id="multi_img<%= index %>">
+                                                                <%product.multi_img.map((v,i)=>{%>
+                                                                    <div style="margin:5px;">
+                                                                        <img src="<%= v %>" alt="" height="50"
+                                                                            width="50"
+                                                                            onclick="return deleteSpecificImg('<%= v %>','<%= product.id %>','<%= i %>','<%= index %>')">
+                                                                    </div>
+                                                                    <%})%>
+                                                            </div>
+
+                                                        </td>
+                                                        <td>
+                                                            <%if(product.isActive){ %>
+                                                                <a href="/admin/product/set_deactive/?id=<%= product.id %>"
+                                                                    class="btn btn-success">Active</a>
+
+                                                                <% }else{ %>
+                                                                    <a href="/admin/product/set_active/?id=<%= product.id %>"
+                                                                        class="btn btn-danger">Deactive</a>
+                                                                    <% } %>
+
+                                                        </td>
+                                                        <td>
+                                                            <div class="table-data-feature">
+                                                                <a href="/admin/product/edit_product/?id=<%= product.id %>"
+                                                                    class="item" data-toggle="tooltip"
+                                                                    data-placement="top" title="Edit">
+                                                                    <i class="zmdi zmdi-edit"></i>
+
+                                                                </a>
+                                                                <a href="/admin/product/delete_product/?id=<%= product.id %>"
+                                                                    class="item" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete">
+                                                                    <i class="zmdi zmdi-delete"></i>
+
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% index++} %>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+                    <div class="row">
+                        <div class="col-12 col-lg-8 col-xl-8">
+                            <div class="card">
+                                <div class="card-header">Site Traffic
+                                    <div class="card-action">
+                                        <div class="dropdown">
+                                            <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                                data-toggle="dropdown">
+                                                <i class="icon-options"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void();">Action</a>
+                                                <a class="dropdown-item" href="javascript:void();">Another action</a>
+                                                <a class="dropdown-item" href="javascript:void();">Something else
+                                                    here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="javascript:void();">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>New
+                                            Visitor
+                                        </li>
+                                        <li class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Old
+                                            Visitor
+                                        </li>
+                                    </ul>
+                                    <div class="chart-container-1">
+                                        <canvas id="chart1"></canvas>
+                                    </div>
+                                </div>
+
+                                <div class="row m-0 row-group text-center border-top border-light-3">
+                                    <div class="col-12 col-lg-4">
+                                        <div class="p-3">
+                                            <h5 class="mb-0">45.87M</h5>
+                                            <small class="mb-0">Overall Visitor <span> <i class="fa fa-arrow-up"></i>
+                                                    2.43%</span></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="p-3">
+                                            <h5 class="mb-0">15:48</h5>
+                                            <small class="mb-0">Visitor Duration <span> <i class="fa fa-arrow-up"></i>
+                                                    12.65%</span></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="p-3">
+                                            <h5 class="mb-0">245.65</h5>
+                                            <small class="mb-0">Pages/Visit <span> <i class="fa fa-arrow-up"></i>
+                                                    5.62%</span></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4 col-xl-4">
+                            <div class="card">
+                                <div class="card-header">Weekly sales
+                                    <div class="card-action">
+                                        <div class="dropdown">
+                                            <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                                data-toggle="dropdown">
+                                                <i class="icon-options"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void();">Action</a>
+                                                <a class="dropdown-item" href="javascript:void();">Another action</a>
+                                                <a class="dropdown-item" href="javascript:void();">Something else
+                                                    here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="javascript:void();">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container-2">
+                                        <canvas id="chart2"></canvas>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table align-items-center">
+                                        <tbody>
+                                            <tr>
+                                                <td><i class="fa fa-circle text-white mr-2"></i> Sub Category</td>
+                                                <td><span id="subcatlength"><%= subcategoryData.length %></span></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-circle text-light-1 mr-2"></i>Extra Category</td>
+                                                <td><span  id="extracatlength"><%= extracategoryData.length %></span></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-circle text-light-2 mr-2"></i>Brand</td>
+                                                <td><span id="brandlength"><%= brandData.length %></span></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-circle text-light-3 mr-2"></i>Type</td>
+                                                <td><span id="typelength"><%= typeData.length %></span></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--End Row-->
+
+                    <div class="row">
+                        <div class="col-12 col-lg-12">
+                            <div class="card">
+                                <div class="card-header">Recent Product Tables
+                                    <div class="card-action">
+                                        <div class="dropdown">
+                                            <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                                data-toggle="dropdown">
+                                                <i class="icon-options"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="javascript:void();">Action</a>
+                                                <a class="dropdown-item" href="javascript:void();">Another action</a>
+                                                <a class="dropdown-item" href="javascript:void();">Something else
+                                                    here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="javascript:void();">Separated link</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table align-items-center table-flush table-borderless table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Photo</th>
+                                                <th>Product ID</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Shipping</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <%recentproductData.map((v)=>{%>
+                                                <tr>
+                                                    <td>
+                                                        <%= v.title %>
+                                                    </td>
+                                                    <td><img src="<%= v.single_img %>" class="product-img"
+                                                            alt="product img">
+                                                    </td>
+                                                    <td>#<%= v.id %>
+                                                    </td>
+                                                    <td>$ <%= v.price %>
+                                                    </td>
+                                                    <td>
+                                                        <%= v.createdDate %>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress shadow" style="height: 3px;">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                style="width: 90%">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <%})%>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--End Row-->
+
+                    <!--End Dashboard Content-->
+
+                    <%- include("footer") %>

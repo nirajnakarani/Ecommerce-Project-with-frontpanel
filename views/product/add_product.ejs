@@ -1,0 +1,187 @@
+<%- include("../admin/header") %>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row mt-3" style="justify-content: center;">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Add Product</div>
+                            <hr>
+                            <form action="/admin/product/insert_product" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select class="form-control" name="categoryId" id="category"
+                                        onchange="return getsubcat()">
+                                        <option value="">-- - --</option>
+                                        <% categoryData.map((v)=>{ %>
+                                            <option value="<%= v.id %>">
+                                                <%= v.category_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sub Category</label>
+                                    <select class="form-control" name="subcategoryId" id="subcategory"
+                                        onchange="return getextracat()">
+                                        <option value="">-- - --</option>
+                                        <% subcategoryData.map((v)=>{ %>
+                                            <option value="<%= v.id %>">
+                                                <%= v.subcategory_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Extra Category</label>
+                                    <select class="form-control" name="extracategoryId" id="extracategory"
+                                        onchange="return getbrandType()">
+                                        <option value="">-- - --</option>
+                                        <% extracategoryData.map((v)=>{ %>
+                                            <option value="<%= v.id %>">
+                                                <%= v.extracategory_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Brand</label>
+                                    <select class="form-control" name="brandId" id="brand">
+                                        <option value="">-- - --</option>
+                                        <% brandData.map((v)=>{ %>
+                                            <option value="<%= v.id %>">
+                                                <%= v.brand_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select class="form-control" name="typeId" id="type">
+                                        <option value="">-- - --</option>
+                                        <% typeData.map((v)=>{ %>
+                                            <option value="<%= v.id %>">
+                                                <%= v.type_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control" placeholder="Enter Your Title" name="title">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="text" class="form-control" placeholder="Enter Your Price" name="price">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Old Price</label>
+                                    <input type="text" class="form-control" placeholder="Enter Your Old Price"
+                                        name="old_price">
+                                </div>
+
+                                <div class="form-group py-2">
+                                    <label>Size</label>
+                                    <div style="display: flex;">
+                                        <div class="icheck-material-white">
+                                            <input type="radio" id="user-radio1" name="size" value="8" />
+                                            <label for="user-radio1">8</label>
+                                        </div>
+                                        <div class="icheck-material-white" style="margin-left: 30px;">
+                                            <input type="radio" id="user-radio2" name="size" value="9" />
+                                            <label for="user-radio2">9</label>
+                                        </div>
+                                        <div class="icheck-material-white" style="margin-left: 30px;">
+                                            <input type="radio" id="user-radio3" name="size" value="10" />
+                                            <label for="user-radio3">10</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group py-2">
+                                    <label>Color</label>
+                                    <div style="display: flex;">
+                                        <div class="icheck-material-white">
+                                            <input type="radio" id="user-1" name="color" value="red" />
+                                            <label for="user-1">red</label>
+                                        </div>
+                                        <div class="icheck-material-white" style="margin-left: 30px;">
+                                            <input type="radio" id="user-2" name="color" value="black" />
+                                            <label for="user-2">black</label>
+                                        </div>
+                                        <div class="icheck-material-white" style="margin-left: 30px;">
+                                            <input type="radio" id="user-3" name="color" value="blue" />
+                                            <label for="user-3">blue</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="form-group py-2">
+                                    <label>Hobby</label>
+                                    <div style="display: flex;">
+                                        <div class="icheck-material-white">
+                                            <input type="checkbox" id="user-checkbox1" name="hobby" value="foody" />
+                                            <label for="user-checkbox1">Foody</label>
+                                        </div>
+                                        <div class="icheck-material-white" style="margin-left: 30px;">
+                                            <input type="checkbox" id="user-checkbox2" name="hobby" value="adventure" />
+                                            <label for="user-checkbox2">adventure</label>
+                                        </div>
+                                        <div class="icheck-material-white" style="margin-left: 30px;">
+                                            <input type="checkbox" id="user-checkbox3" name="hobby"
+                                                value="travelling" />
+                                            <label for="user-checkbox3">travelling</label>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control"
+                                        placeholder="Enter Description"></textarea>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Single Image</label>
+                                    <label class="filelabel">
+                                        <i class="fa fa-paperclip">
+                                        </i>
+                                        <span class="title">
+                                            Add Img
+                                        </span>
+                                        <input class="FileUpload1" id="FileInput" name="single_img" type="file" />
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Multiple Images</label>
+                                    <label class="filelabel1">
+                                        <i class="fa fa-paperclip">
+                                        </i>
+                                        <span class="title1">
+                                            Add Images
+                                        </span>
+                                        <input class="FileUpload1" id="FileInput1" name="multi_img" type="file"
+                                            multiple />
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i>
+                                        Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--End Row-->
+
+            <%- include("../admin/footer") %>

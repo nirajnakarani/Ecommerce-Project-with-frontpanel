@@ -1,0 +1,158 @@
+<footer class="footer_part">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-sm-6 col-lg-2">
+                <div class="single_footer_part">
+                    <h4>Category</h4>
+                    <ul class="list-unstyled">
+                        <%categoryData.map((v)=>{%>
+                            <li><a href="/single_category/?cat=<%= v.id %>">
+                                    <%= v.category_name %>
+                                </a></li>
+                            <%})%>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="single_footer_part">
+                    <h4>Company</h4>
+                    <ul class="list-unstyled">
+                        <li><a href>About</a></li>
+                        <li><a href>News</a></li>
+                        <li><a href>FAQ</a></li>
+                        <li><a href>Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="single_footer_part">
+                    <h4>Address</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">200, Green block, NewYork</a></li>
+                        <li><a href="#">+10 456 267 1678</a></li>
+                        <li><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                    data-cfemail="1f7c70716b7e7c6b27265f6876716b7a6d317c7072">[email&#160;protected]</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="single_footer_part">
+                    <h4>Newsletter</h4>
+                    <div id="mc_embed_signup">
+                        <form target="_blank"
+                            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                            method="get" class="subscribe_form relative mail_part">
+                            <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = ' Email Address '">
+                            <button type="submit" name="submit" id="newsletter-submit"
+                                class="email_icon newsletter-submit button-contactForm">subscribe</button>
+                            <div class="mt-10 info"></div>
+                        </form>
+                    </div>
+                    <div class="social_icon">
+                        <a href="#"><i class="ti-facebook"></i></a>
+                        <a href="#"><i class="ti-twitter-alt"></i></a>
+                        <a href="#"><i class="ti-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="copyright_text">
+                    <P>
+                        Copyright &copy;
+                        <script data-cfasync="false"
+                            src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
+                    </P>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/js/jquery-1.12.1.min.js"></script>
+
+<script src="/js/popper.min.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/jquery.magnific-popup.js"></script>
+
+<script src="/js/swiper.min.js"></script>
+
+<script src="/js/stellar.js"></script>
+
+<script src="/js/mixitup.min.js"></script>
+
+<script src="/js/price_rangs.js"></script>
+
+<script src="/js/owl.carousel.min.js"></script>
+
+<script src="/js/jquery.nice-select.min.js"></script>
+
+<script src="/js/slick.min.js"></script>
+
+<script src="/js/jquery.counterup.min.js"></script>
+
+<script src="/js/jquery.ajaxchimp.min.js"></script>
+
+<script src="/js/jquery.form.js"></script>
+
+<script src="/js/jquery.validate.min.js"></script>
+
+<script src="/js/mail-script.js"></script>
+
+<script src="/js/contact.js"></script>
+
+<script src="/js/waypoints.min.js"></script>
+
+<script src="/js/lightslider.min.js"></script>
+
+<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+
+<script src="/js/custom.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
+    integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
+    data-cf-beacon='{"rayId":"839e806dcbff9a9c","version":"2023.10.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
+    crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            asNavFor: '.slider-nav'
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: true,
+            centerMode: true,
+            focusOnSelect: true
+        });
+    });
+
+</script>
+</body>
+
+</html>

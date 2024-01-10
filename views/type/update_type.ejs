@@ -1,0 +1,66 @@
+<%- include("../admin/header") %>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row mt-3" style="justify-content: center;">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Update Type</div>
+                            <hr>
+                            <form action="/admin/type/update_type" method="post">
+                                <div class="form-group">
+                                    <input type="hidden" value="<%= type.id %>" name="editId">
+                                    <label>Category</label>
+                                    <select class="form-control" name="categoryId" id="category"
+                                        onchange="return getsubcat()">
+                                        <option value="">-- - --</option>
+                                        <% categoryData.map((v)=>{ %>
+                                            <option value="<%= v.id %>" <%if(v.id==type.categoryId.id){%> <%= "selected" %><%}%> >
+                                                <%= v.category_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sub Category</label>
+                                    <select class="form-control" name="subcategoryId" id="subcategory"
+                                        onchange="return getextracat()">
+                                        <option value="">-- - --</option>
+                                        <% subcategoryData.map((v)=>{ %>
+                                            <option value="<%= v.id %>" <%if(v.id==type.subcategoryId.id){%> <%= "selected" %><%}%>>
+                                                <%= v.subcategory_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Extra Category</label>
+                                    <select class="form-control" name="extracategoryId" id="extracategory">
+                                        <option value="">-- - --</option>
+                                        <% extracategoryData.map((v)=>{ %>
+                                            <option value="<%= v.id %>"<%if(v.id==type.extracategoryId.id){%> <%= "selected" %><%}%> >
+                                                <%= v.extracategory_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <input type="text" class="form-control" placeholder="Enter Your Type"
+                                        name="type_name" value="<%= type.type_name %>">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i>
+                                        Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--End Row-->
+
+            <%- include("../admin/footer") %>
