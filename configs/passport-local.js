@@ -109,16 +109,27 @@ passport.setAuth = function (req, res, next) {
 
 // ----- check Auth -----
 
-passport.chekAuth = function (req, res, next) {
+passport.checkAuth = function (req, res, next) {
     if (req.isAuthenticated()) {
         if (req.user.role == "admin") {
             next()
         }
-        else {
-            return res.redirect("/")
-        }
     }
     else {
         return res.redirect("/admin/")
+    }
+}
+
+
+// ----- check user Auth -----
+
+passport.checkUserAuth = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        if (req.user.role == "user") {
+            next()
+        }
+    }
+    else {
+        return res.redirect("/")
     }
 }

@@ -35,12 +35,12 @@ routes.post("/login_admin", passport.authenticate("local", { failureRedirect: "/
 
 // ----- dashboard -----
 
-routes.get("/dashboard", passport.chekAuth, adminController.dashboard)
+routes.get("/dashboard", passport.checkAuth, adminController.dashboard)
 
 
 // ----- add admin page -----
 
-routes.get("/add_admin", passport.chekAuth, adminController.add_admin)
+routes.get("/add_admin", passport.checkAuth, adminController.add_admin)
 
 
 // ----- insert admin -----
@@ -50,7 +50,7 @@ routes.post("/insert_admin", admin.uploadAdminImg, adminController.insert_admin)
 
 // ----- view admin page -----
 
-routes.get("/view_admin", passport.chekAuth, adminController.view_admin)
+routes.get("/view_admin", passport.checkAuth, adminController.view_admin)
 
 
 // ----- set deactive -----
@@ -75,7 +75,7 @@ routes.post("/delete_many", adminController.delete_many)
 
 // ----- edit admin -----
 
-routes.get("/edit_admin", passport.chekAuth, adminController.edit_admin)
+routes.get("/edit_admin", passport.checkAuth, adminController.edit_admin)
 
 
 // ----- update admin -----
@@ -85,12 +85,12 @@ routes.post("/update_admin", admin.uploadAdminImg, adminController.update_admin)
 
 // ----- profile -----
 
-routes.get("/profile", passport.chekAuth, adminController.profile)
+routes.get("/profile", passport.checkAuth, adminController.profile)
 
 
 // ----- change password page -----
 
-routes.get("/change_password", passport.chekAuth, adminController.change_password)
+routes.get("/change_password", passport.checkAuth, adminController.change_password)
 
 
 // ----- update password -----
@@ -100,7 +100,7 @@ routes.post("/update_password",adminController.update_password)
 
 // ----- logout -----
 
-routes.get("/logout", passport.chekAuth, adminController.logout)
+routes.get("/logout", passport.checkAuth, adminController.logout)
 
 
 // ----- reset page -----
@@ -125,32 +125,32 @@ routes.post("/checknewPass", adminController.checknewPass)
 
 // ----- category -----
 
-routes.use("/category", passport.chekAuth, require("./category"))
+routes.use("/category", passport.checkAuth, require("./category"))
 
 
 // ----- sub category -----
 
-routes.use("/subcategory", passport.chekAuth, require("./subcategory"))
+routes.use("/subcategory", passport.checkAuth, require("./subcategory"))
 
 
 // ----- extra category -----
 
-routes.use("/extracategory", passport.chekAuth, require("./extracategory"))
+routes.use("/extracategory", passport.checkAuth, require("./extracategory"))
 
 
 // ----- brand -----
 
-routes.use("/brand", passport.chekAuth, require("./brand"))
+routes.use("/brand", passport.checkAuth, require("./brand"))
 
 
 // ----- type -----
 
-routes.use("/type", passport.chekAuth, require("./type"))
+routes.use("/type", passport.checkAuth, require("./type"))
 
 
 // ----- product -----
 
-routes.use("/product", passport.chekAuth, require("./product"))
+routes.use("/product", passport.checkAuth, require("./product"))
 
 
 // ----- export -----

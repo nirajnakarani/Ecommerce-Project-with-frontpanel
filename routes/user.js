@@ -88,6 +88,21 @@ routes.get("/user_registerPage", userController.user_registerPage)
 routes.post("/register", userController.register)
 
 
+// ----- cart page -----
+
+routes.get("/cartPage", passport.checkUserAuth, userController.cartPage)
+
+
+// ----- cart page -----
+
+routes.post("/addCart", userController.addCart)
+
+
+// ----- delete cart item -----
+
+routes.post("/deleteItem", userController.deleteItem)
+
+
 // ----- export -----
 
 module.exports = routes;

@@ -94,7 +94,7 @@ var productSchema = mongoose.Schema({
     updatedDate: {
         type: String,
         required: true
-    },
+    }
 })
 
 

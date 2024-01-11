@@ -33,7 +33,7 @@ var brandSchema = mongoose.Schema({
     updatedDate: {
         type: String,
         required: true
-    },
+    }
 })
 
 

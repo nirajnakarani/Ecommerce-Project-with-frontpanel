@@ -33,16 +33,26 @@ var product = require("../models/product");
 var user = require("../models/user");
 
 
+// ----- cart model -----
+
+var cart = require("../models/cart");
+
+
 // ----- home -----
 
 module.exports.home = async (req, res) => {
     try {
         var categoryData = await category.find({ isActive: true });
+        var cartCount = 0;
+        if (req.user) {
+            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+        }
         var bg_white = ""
         if (categoryData) {
             return res.render("user/home", {
                 categoryData: categoryData,
-                bg_white: bg_white
+                bg_white: bg_white,
+                cartCount: cartCount
             })
         }
         else {
@@ -69,7 +79,10 @@ module.exports.single_category = async (req, res) => {
         var productData = await product.find({ categoryId: req.query.cat, isActive: true }).populate("brandId").populate("typeId").exec()
         var max = Math.max(...productData.map(v => v.price));
         var min = Math.min(...productData.map(v => v.price));
-
+        var cartCount = 0;
+        if (req.user) {
+            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+        }
         var brand_list = [];
         var type_list = [];
         productData.map((v) => {
@@ -99,7 +112,8 @@ module.exports.single_category = async (req, res) => {
                 max: max,
                 min: min,
                 brand_list: brand_list,
-                type_list: type_list
+                type_list: type_list,
+                cartCount: cartCount
             })
         }
         else {
@@ -127,7 +141,10 @@ module.exports.multi_cat = async (req, res) => {
         var productData = await product.find({ categoryId: req.query.cat, subcategoryId: req.query.subcat, extracategoryId: req.query.extracat, isActive: true }).populate("brandId").populate("typeId").exec()
         var max = Math.max(...productData.map(v => v.price));
         var min = Math.min(...productData.map(v => v.price));
-
+        var cartCount = 0;
+        if (req.user) {
+            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+        }
         var brand_list = [];
         var type_list = []
         productData.map((v) => {
@@ -161,7 +178,8 @@ module.exports.multi_cat = async (req, res) => {
                 max: max,
                 min: min,
                 brand_list: brand_list,
-                type_list: type_list
+                type_list: type_list,
+                cartCount: cartCount
             })
         }
         else {
@@ -185,13 +203,18 @@ module.exports.single_product = async (req, res) => {
         var single_productData = await product.findById(req.query.product).populate("categoryId").exec()
         var recent_productData = await product.find({ isActive: true }).sort({ "_id": -1 }).limit(4)
         var bg_white = "bg white"
+        var cartCount = 0;
+        if (req.user) {
+            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+        }
         // console.log(recentProductData)
         if (categoryData) {
             return res.render("user/single_product", {
                 categoryData: categoryData,
                 single_productData: single_productData,
                 recent_productData: recent_productData,
-                bg_white: bg_white
+                bg_white: bg_white,
+                cartCount: cartCount
             })
         }
         else {
@@ -504,11 +527,16 @@ module.exports.change_multicattype = async (req, res) => {
 module.exports.user_loginPage = async (req, res) => {
     try {
         var categoryData = await category.find({ isActive: true });
+        var cartCount = 0;
+        if (req.user) {
+            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+        }
         var bg_white = "bg white"
         if (categoryData) {
             return res.render("user/user_loginPage", {
                 categoryData: categoryData,
-                bg_white: bg_white
+                bg_white: bg_white,
+                cartCount: cartCount
             })
         }
         else {
@@ -542,11 +570,16 @@ module.exports.login = async (req, res) => {
 module.exports.user_registerPage = async (req, res) => {
     try {
         var categoryData = await category.find({ isActive: true });
+        var cartCount = 0;
+        if (req.user) {
+            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+        }
         var bg_white = "bg white"
         if (categoryData) {
             return res.render("user/user_registerPage", {
                 categoryData: categoryData,
-                bg_white: bg_white
+                bg_white: bg_white,
+                cartCount: cartCount
             })
         }
         else {
@@ -593,6 +626,140 @@ module.exports.register = async (req, res) => {
     }
     catch (err) {
         console.log(err);
+        return res.redirect("back")
+    }
+}
+
+
+// ----- add cart -----
+
+module.exports.addCart = async (req, res) => {
+    try {
+        var incart = await cart.findOne({ productId: req.body.productId, userId: req.body.userId })
+        if (incart) {
+            console.log("product alredy cart")
+            return res.redirect("back")
+        }
+        else {
+            req.body.status = "pending"
+            var insertCart = await cart.create(req.body);
+            if (insertCart) {
+                console.log("product insert")
+                return res.redirect("/single_product/?product=" + req.body.productId)
+            }
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return res.redirect("back")
+    }
+}
+
+
+// ----- cart page -----
+
+module.exports.cartPage = async (req, res) => {
+    try {
+        var categoryData = await category.find({ isActive: true });
+        var cartCount = 0;
+        if (req.user) {
+            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+        }
+        var cartData = await cart.find({ userId: req.user.id }).populate("productId").exec()
+        var bg_white = "bg white"
+        if (categoryData) {
+            return res.render("user/cart", {
+                categoryData: categoryData,
+                bg_white: bg_white,
+                cartCount: cartCount,
+                cartData: cartData
+            })
+        }
+        else {
+            console.log("data not found")
+            return res.redirect("back")
+        }
+    }
+    catch (err) {
+        console.log(err)
+        return res.redirect("back")
+    }
+}
+
+
+// ----- delete cart item -----
+
+module.exports.deleteItem = async (req, res) => {
+    try {
+        var cartDelete = await cart.findByIdAndDelete(req.body.cartId);
+        if (cartDelete) {
+            var cartChange = ``
+            var cartData = await cart.find({ userId: req.user.id }).populate("productId").exec()
+            var sum = 0;
+            cartData.map((v, i) => {
+                cartChange += ` <tr>
+                <td>
+                    <div class="btn--delete btn-step">
+                        <div class="btn-step-wrapper close">
+                            <div class="btn-step-icon close-icon">
+                                <div class="x part-a"></div>
+                                <div class="x part-b"></div>
+                            </div>
+                        </div>
+                        <div class="btn-step-wrapper confirm">
+                            <div class="btn-step-icon confirm-icon"
+                                onclick="deleteItem('${v.id}')">
+                                <div class="v part-a"></div>
+                                <div class="v part-b"></div>
+                            </div>
+                            <div class="btn-corner"></div>
+                        </div>
+                    </div>
+
+                </td>
+                <td>
+                    <div class="media">
+                        <div class="d-flex">
+                            <img src="${v.productId.single_img}" alt />
+                        </div>
+                        <div class="media-body">
+                            <p>
+                                 ${v.productId.title}
+                            </p>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <h5>₹  ${v.productId.price}
+                    </h5>
+                </td>
+                <td>
+                    <div class="product_count">
+
+                        <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                        <input class="input-number" type="text" value="${v.quantity}" min="0"
+                            max="10">
+                        <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                    </div>
+                </td>
+                <td>
+                    <h5>₹ ${parseInt(v.productId.price) * parseInt(v.quantity)}
+                    </h5>
+                </td>
+            </tr>`
+                sum += parseInt(v.productId.price) * parseInt(v.quantity)
+            })
+            return res.json(cartChange)
+        }
+        else {
+            console.log("data not delete");
+            return res.redirect("back")
+        }
+
+    }
+    catch (err) {
+        console.log(err)
         return res.redirect("back")
     }
 }

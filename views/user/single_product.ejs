@@ -23,7 +23,7 @@
                         <div class="slider-for">
                             <%single_productData.multi_img.map((v)=>{%>
                                 <div>
-                                    <img src="<%=v%>" alt="" height="400" width="100%"style="object-fit:cover;">
+                                    <img src="<%=v%>" alt="" height="400" width="100%" style="object-fit:cover;">
                                 </div>
                                 <%})%>
                         </div>
@@ -63,8 +63,14 @@
                                 <span class="number-increment"> <i class="ti-plus"></i></span>
                             </div>
                             <div class="add_to_cart">
-                                <a href="#" class="btn_3">add to cart</a>
-                                <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+                                <%if(locals.userData){%>
+                                    <button class="btn_3"
+                                        onclick="return addCart('<%=single_productData.id%>','<%=locals.userData.id%>')">add
+                                        to
+                                        cart</button>
+                                    <%}else{%>
+                                        <a href="/user_loginPage" class="btn_3">add to cart</a>
+                                        <%}%>
                             </div>
                             <div class="social_icon">
                                 <a href="#" class="fb"><i class="ti-facebook"></i></a>
@@ -584,3 +590,21 @@
     </section>
 
     <%- include("user_footer") %>
+
+        <script>
+            function addCart(pid, uid) {
+                var quantity = document.querySelector(".input-number").value;
+                $.ajax({
+                    url: "/addCart",
+                    method: "post",
+                    data: {
+                        quantity: quantity,
+                        productId: pid,
+                        userId: uid
+                    },
+                    success: function (res) {
+                        // window.reload
+                    }
+                })
+            }   
+        </script>

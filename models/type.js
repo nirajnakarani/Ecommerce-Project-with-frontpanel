@@ -33,7 +33,7 @@ var typeSchema = mongoose.Schema({
     updatedDate: {
         type: String,
         required: true
-    },
+    }
 })
 
 

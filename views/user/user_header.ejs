@@ -32,6 +32,8 @@
 
     <link rel="stylesheet" href="/css/lightslider.min.css">
 
+    <link rel="stylesheet" href="/css/icon.css">
+
     <link rel="stylesheet" href="/css/style.css">
 
     <script
@@ -79,11 +81,23 @@
                                         </div>
                                         <div class="hearer_icon d-flex">
                                             <div class="dropdown cart">
-                                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="ti-bag"></i>
-                                                </a>
-
+                                                <%if(locals.userData){%>
+                                                    <a class="dropdown-toggle" href="/cartPage" id="navbarDropdown3">
+                                                        <i class="ti-bag">
+                                                            <span>
+                                                                <%=cartCount%>
+                                                            </span>
+                                                        </i>
+                                                    </a>
+                                                    <%}else{%>
+                                                        <a class="dropdown-toggle" href="/" id="navbarDropdown3">
+                                                            <i class="ti-bag">
+                                                                <span>
+                                                                    0
+                                                                </span>
+                                                            </i>
+                                                        </a>
+                                                        <%}%>
                                             </div>
                                             <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
                                             <div style="margin-left: 30px;">

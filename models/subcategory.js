@@ -25,7 +25,7 @@ var subcategorySchema = mongoose.Schema({
     updatedDate: {
         type: String,
         required: true
-    },
+    }
 })
 
 

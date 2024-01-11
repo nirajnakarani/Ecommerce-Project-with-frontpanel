@@ -21,7 +21,7 @@ var categorySchema = mongoose.Schema({
     updatedDate: {
         type: String,
         required: true
-    },
+    }
 })
 
 

@@ -29,7 +29,7 @@ var extracategorySchema = mongoose.Schema({
     updatedDate: {
         type: String,
         required: true
-    },
+    }
 })
 
 

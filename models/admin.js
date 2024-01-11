@@ -68,7 +68,7 @@ var adminSchema = mongoose.Schema({
     updatedDate: {
         type: String,
         required: true
-    },
+    }
 })
 
 
