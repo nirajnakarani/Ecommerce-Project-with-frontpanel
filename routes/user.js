@@ -103,6 +103,11 @@ routes.post("/addCart", userController.addCart)
 routes.post("/deleteItem", userController.deleteItem)
 
 
+// ----- change quantity -----
+
+routes.post("/changeQuantity", userController.changeQuantity)
+
+
 // ----- export -----
 
 module.exports = routes;

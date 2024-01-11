@@ -1,4 +1,4 @@
-<%- include("user_header") %>
+<%- include("user_header2") %>
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
             <div class="row justify-content-center">
@@ -64,20 +64,24 @@
                                     </td>
 
                                     <td>
-                                        <h5>₹ <%= v.productId.price %>
+                                        <h5>₹ <span id="price<%=i%>">
+                                                <%= v.productId.price %>
+                                            </span>
                                         </h5>
                                     </td>
                                     <td>
                                         <div class="product_count">
 
-                                            <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                            <input class="input-number" type="text" value="<%= v.quantity %>" min="0"
-                                                max="10">
-                                            <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                                            <input class="input-number" type="number" value="<%= v.quantity %>" min="0"
+                                                max="10" id="quantity<%=i%>"
+                                                onchange="return changeQuantity('<%=i%>','<%=v.id%>')">
+
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>₹ <%=parseInt(v.productId.price)*parseInt( v.quantity)%>
+                                        <h5>₹ <span id="total<%=i%>">
+                                                <%=parseInt(v.productId.price)*parseInt( v.quantity)%>
+                                            </span>
                                         </h5>
                                     </td>
                                 </tr>
@@ -91,7 +95,9 @@
                                                 <h5>Subtotal</h5>
                                             </td>
                                             <td>
-                                                <h5>₹ <%=sum%>
+                                                <h5>₹ <span id="finalTotal">
+                                                        <%=sum%>
+                                                    </span>
                                                 </h5>
                                             </td>
                                         </tr>
@@ -128,4 +134,26 @@
                     }
                 })
             }
+            function changeQuantity(i, cartId) {
+                var quantity = document.getElementById("quantity" + i).value;
+                var price = document.getElementById("price" + i).innerHTML;
+                var Total = quantity * price;
+                document.getElementById("total" + i).innerHTML = Total;
+                var finalTotal = 0
+                for (var a = 0; a < '<%=cartData.length%>'; a++) {
+                    finalTotal += parseInt(document.getElementById("total" + a).innerHTML)
+                }
+                document.getElementById("finalTotal").innerHTML = finalTotal;
+
+                $.ajax({
+                    url: "changeQuantity",
+                    method: "post",
+                    data: {
+                        quantity: quantity,
+                        cartId: cartId
+                    }
+                })
+            }
+
+
         </script>

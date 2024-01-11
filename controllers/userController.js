@@ -749,7 +749,22 @@ module.exports.deleteItem = async (req, res) => {
                 </td>
             </tr>`
                 sum += parseInt(v.productId.price) * parseInt(v.quantity)
+                cartChange += ` <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <h5>Subtotal</h5>
+                </td>
+                <td>
+                    <h5>₹ <span id="finalTotal">
+                            ${sum}
+                        </span>
+                    </h5>
+                </td>
+            </tr>`
             })
+
             return res.json(cartChange)
         }
         else {
@@ -760,6 +775,27 @@ module.exports.deleteItem = async (req, res) => {
     }
     catch (err) {
         console.log(err)
+        return res.redirect("back")
+    }
+}
+
+
+// ----- changeQuantity -----
+
+module.exports.changeQuantity = async (req, res) => {
+    try {
+        var cartQuantity = await cart.findByIdAndUpdate(req.body.cartId, { quantity: req.body.quantity });
+        if (cartQuantity) {
+            console.log("change")
+            return res.redirect("back")
+        }
+        else {
+            console.log("not change")
+            return res.redirect("back")
+        }
+    }
+    catch (err) {
+        console.log(err);
         return res.redirect("back")
     }
 }
