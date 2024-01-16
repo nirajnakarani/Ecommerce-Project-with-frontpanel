@@ -108,6 +108,16 @@ routes.post("/deleteItem", userController.deleteItem)
 routes.post("/changeQuantity", userController.changeQuantity)
 
 
+// ----- check out -----
+
+routes.get("/checkout", passport.checkUserAuth, userController.checkout)
+
+
+// ----- payment -----
+
+routes.post("/payment", passport.checkUserAuth, userController.payment)
+
+
 // ----- export -----
 
 module.exports = routes;

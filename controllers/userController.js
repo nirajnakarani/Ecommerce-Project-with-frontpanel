@@ -45,7 +45,7 @@ module.exports.home = async (req, res) => {
         var categoryData = await category.find({ isActive: true });
         var cartCount = 0;
         if (req.user) {
-            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+            cartCount = await cart.find({ userId: req.user.id , status:"pending" }).countDocuments()
         }
         var bg_white = ""
         if (categoryData) {
@@ -750,8 +750,8 @@ module.exports.deleteItem = async (req, res) => {
                     </h5>
                 </td>
             </tr>`
-            sum += parseInt(v.productId.price) * parseInt(v.quantity)
-        })
+                sum += parseInt(v.productId.price) * parseInt(v.quantity)
+            })
             cartChange += ` <tr>
                 <td></td>
                 <td></td>
@@ -799,4 +799,66 @@ module.exports.changeQuantity = async (req, res) => {
         console.log(err);
         return res.redirect("back")
     }
+}
+
+
+// ----- check out -----
+
+module.exports.checkout = async (req, res) => {
+    try {
+        var cartData = await cart.find({ userId: req.user.id, status: "pending" }).populate("productId").exec();
+
+        var total = 0;
+        cartData.map((v, i) => {
+            total += parseInt(v.quantity) * parseInt(v.productId.price)
+        })
+        return res.render("user/checkout", {
+            key: "acb",
+            total: total
+        })
+    }
+    catch (err) {
+        console.log(err);
+        return res.redirect("back")
+    }
+}
+
+
+// ----- payment -----
+
+module.exports.payment = async (req, res) => {
+
+    var cartData = await cart.find({ userId: req.user.id, status: "pending" }).populate("productId").exec();
+
+    var total = 0;
+    cartData.map((v, i) => {
+        total += parseInt(v.quantity) * parseInt(v.productId.price)
+    })
+
+    stripe.customers.create({
+        email: req.body.stripeEmail,
+        source: req.body.stripeToken,
+        name: 'Gourav Hammad',
+        address: {
+            line1: 'TC 9/4 Old MES colony',
+            postal_code: '452331',
+            city: 'Indore',
+            state: 'Madhya Pradesh',
+            country: 'India',
+        }
+    }).then((customer) => {
+
+        return stripe.charges.create({
+            amount: total,     // Charging Rs total
+            description: 'Web Development Product',
+            currency: 'INR',
+            customer: customer.id
+        });
+    })
+        .then((charge) => {
+            res.send("Success")  // If no error occurs
+        })
+        .catch((err) => {
+            res.send(err)       // If some error occurs
+        });
 }
