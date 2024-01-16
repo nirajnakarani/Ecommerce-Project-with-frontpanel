@@ -638,14 +638,16 @@ module.exports.addCart = async (req, res) => {
         var incart = await cart.findOne({ productId: req.body.productId, userId: req.body.userId })
         if (incart) {
             console.log("product alredy cart")
-            return res.redirect("back")
         }
         else {
             req.body.status = "pending"
             var insertCart = await cart.create(req.body);
+            cartCount = await cart.find({ userId: req.body.userId }).countDocuments();
+
             if (insertCart) {
                 console.log("product insert")
-                return res.redirect("/single_product/?product=" + req.body.productId)
+                return res.json(cartCount)
+                // return res.redirect("/single_product/?product=" + req.body.productId)
             }
         }
     }
@@ -748,8 +750,9 @@ module.exports.deleteItem = async (req, res) => {
                     </h5>
                 </td>
             </tr>`
-                sum += parseInt(v.productId.price) * parseInt(v.quantity)
-                cartChange += ` <tr>
+            sum += parseInt(v.productId.price) * parseInt(v.quantity)
+        })
+            cartChange += ` <tr>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -763,8 +766,6 @@ module.exports.deleteItem = async (req, res) => {
                     </h5>
                 </td>
             </tr>`
-            })
-
             return res.json(cartChange)
         }
         else {
