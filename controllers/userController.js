@@ -43,16 +43,18 @@ var cart = require("../models/cart");
 module.exports.home = async (req, res) => {
     try {
         var categoryData = await category.find({ isActive: true });
+        var recent_productData = await product.find({ isActive: true }).populate("categoryId").sort({ "_id": -1 }).limit(3).exec()
         var cartCount = 0;
         if (req.user) {
-            cartCount = await cart.find({ userId: req.user.id , status:"pending" }).countDocuments()
+            cartCount = await cart.find({ userId: req.user.id, status: "pending" }).countDocuments()
         }
         var bg_white = ""
         if (categoryData) {
             return res.render("user/home", {
                 categoryData: categoryData,
                 bg_white: bg_white,
-                cartCount: cartCount
+                cartCount: cartCount,
+                recent_productData: recent_productData
             })
         }
         else {

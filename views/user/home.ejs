@@ -62,10 +62,10 @@
                         <ul>
                             <li class="active controls" data-filter="*">all</li>
                             <%categoryData.map((v)=>{%>
+
                                 <li class="controls" data-toggle=".<%=v.category_name%>">
                                     <%=v.category_name%>
                                 </li>
-
                                 <%})%>
                         </ul>
                     </div>
@@ -76,132 +76,42 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="new_arrival_iner filter-container">
-                        <div class="single_arrivel_item weidth_1 mix ale">
-                            <img src="/img/arrivel/arrivel_5.png" alt="#">
-                            <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html">
-                                    <h3>Lorem Canvas Low-Top Sneaker</h3>
+
+                        <%recent_productData.map((v,i)=>{%>
+
+                            <div class="single_arrivel_item weidth_<%=i+1%> mix <%=v.categoryId.category_name%>">
+
+                                <a href="/single_product/?product=<%=v.id%>">
+                                    <img src="<%=v.single_img%>" alt="#" style="height: 450px; object-fit: cover;">
+                                    <div class="hover_text">
+                                        <p>
+                                            <%=v.title%>
+                                        </p>
+                                        <a href="/single_product/?product=<%=v.id%>">
+                                            <h3>
+                                                <%=v.description%>
+                                            </h3>
+                                        </a>
+                                        <div class="rate_icon">
+                                            <a href="#"> <i class="fas fa-star"></i> </a>
+                                            <a href="#"> <i class="fas fa-star"></i> </a>
+                                            <a href="#"> <i class="fas fa-star"></i> </a>
+                                            <a href="#"> <i class="fas fa-star"></i> </a>
+                                            <a href="#"> <i class="fas fa-star"></i> </a>
+                                        </div>
+                                        <h5>₹ <%=v.price%>
+                                        </h5>
+                                        <div class="social_icon">
+                                            <a href="#"><i class="ti-heart"></i></a>
+                                            <a href="#"><i class="ti-bag"></i></a>
+                                        </div>
+                                    </div>
                                 </a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
-                                <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
-                                </div>
                             </div>
-                        </div>
-                        <div class="single_arrivel_item weidth_2 mix women">
-                            <img src="/img/arrivel/arrivel_2.png" alt="#">
-                            <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html">
-                                    <h3>Lorem Canvas Low-Top Sneaker</h3>
-                                </a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
-                                <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_arrivel_item weidth_3 mix shoes women">
-                            <img src="/img/arrivel/arrivel_3.png" alt="#">
-                            <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html">
-                                    <h3>Lorem Canvas Low-Top Sneaker</h3>
-                                </a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
-                                <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_arrivel_item weidth_3 mix women men">
-                            <img src="/img/arrivel/arrivel_4.png" alt="#">
-                            <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html">
-                                    <h3>Lorem Canvas Low-Top Sneaker</h3>
-                                </a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
-                                <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_arrivel_item weidth_2 mix men women">
-                            <img src="/img/arrivel/arrivel_1.png" alt="#">
-                            <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html">
-                                    <h3>Lorem Canvas Low-Top Sneaker</h3>
-                                </a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
-                                <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_arrivel_item weidth_1 mix shoes men">
-                            <img src="/img/arrivel/arrivel_6.png" alt="#">
-                            <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html">
-                                    <h3>Lorem Canvas Low-Top Sneaker</h3>
-                                </a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
-                                <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                            <%})%>
+
+
+
                     </div>
                 </div>
             </div>
