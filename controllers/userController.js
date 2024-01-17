@@ -38,6 +38,16 @@ var user = require("../models/user");
 var cart = require("../models/cart");
 
 
+// ----- confirm order model -----
+
+var order = require("../models/confirm_order");
+
+
+// ----- sripe -----
+
+var stripe = require("stripe")("sk_test_wFSjCKx4AW07JCc87b2fUwhH00zzjnRSJv")
+
+
 // ----- home -----
 
 module.exports.home = async (req, res) => {
@@ -83,7 +93,7 @@ module.exports.single_category = async (req, res) => {
         var min = Math.min(...productData.map(v => v.price));
         var cartCount = 0;
         if (req.user) {
-            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+            cartCount = await cart.find({ userId: req.user.id, status: "pending" }).countDocuments()
         }
         var brand_list = [];
         var type_list = [];
@@ -145,7 +155,7 @@ module.exports.multi_cat = async (req, res) => {
         var min = Math.min(...productData.map(v => v.price));
         var cartCount = 0;
         if (req.user) {
-            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+            cartCount = await cart.find({ userId: req.user.id, status: "pending" }).countDocuments()
         }
         var brand_list = [];
         var type_list = []
@@ -207,7 +217,7 @@ module.exports.single_product = async (req, res) => {
         var bg_white = "bg white"
         var cartCount = 0;
         if (req.user) {
-            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+            cartCount = await cart.find({ userId: req.user.id, status: "pending" }).countDocuments()
         }
         // console.log(recentProductData)
         if (categoryData) {
@@ -531,7 +541,7 @@ module.exports.user_loginPage = async (req, res) => {
         var categoryData = await category.find({ isActive: true });
         var cartCount = 0;
         if (req.user) {
-            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+            cartCount = await cart.find({ userId: req.user.id, status: "pending" }).countDocuments()
         }
         var bg_white = "bg white"
         if (categoryData) {
@@ -574,7 +584,7 @@ module.exports.user_registerPage = async (req, res) => {
         var categoryData = await category.find({ isActive: true });
         var cartCount = 0;
         if (req.user) {
-            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+            cartCount = await cart.find({ userId: req.user.id, status: "pending" }).countDocuments()
         }
         var bg_white = "bg white"
         if (categoryData) {
@@ -637,14 +647,14 @@ module.exports.register = async (req, res) => {
 
 module.exports.addCart = async (req, res) => {
     try {
-        var incart = await cart.findOne({ productId: req.body.productId, userId: req.body.userId })
+        var incart = await cart.findOne({ productId: req.body.productId, userId: req.body.userId, status: "pending" })
         if (incart) {
             console.log("product alredy cart")
         }
         else {
             req.body.status = "pending"
             var insertCart = await cart.create(req.body);
-            cartCount = await cart.find({ userId: req.body.userId }).countDocuments();
+            cartCount = await cart.find({ userId: req.body.userId, status: "pending" }).countDocuments();
 
             if (insertCart) {
                 console.log("product insert")
@@ -667,9 +677,9 @@ module.exports.cartPage = async (req, res) => {
         var categoryData = await category.find({ isActive: true });
         var cartCount = 0;
         if (req.user) {
-            cartCount = await cart.find({ userId: req.user.id }).countDocuments()
+            cartCount = await cart.find({ userId: req.user.id, status: "pending" }).countDocuments()
         }
-        var cartData = await cart.find({ userId: req.user.id }).populate("productId").exec()
+        var cartData = await cart.find({ userId: req.user.id, status: "pending" }).populate("productId").exec()
         var bg_white = "bg white"
         if (categoryData) {
             return res.render("user/cart", {
@@ -698,7 +708,7 @@ module.exports.deleteItem = async (req, res) => {
         var cartDelete = await cart.findByIdAndDelete(req.body.cartId);
         if (cartDelete) {
             var cartChange = ``
-            var cartData = await cart.find({ userId: req.user.id }).populate("productId").exec()
+            var cartData = await cart.find({ userId: req.user.id, status: "pending" }).populate("productId").exec()
             var sum = 0;
             cartData.map((v, i) => {
                 cartChange += ` <tr>
@@ -815,7 +825,7 @@ module.exports.checkout = async (req, res) => {
             total += parseInt(v.quantity) * parseInt(v.productId.price)
         })
         return res.render("user/checkout", {
-            key: "acb",
+            key: "pk_test_5RzHjUwGCx0aBvQYxmMprB1200k4WeKjIa",
             total: total
         })
     }
@@ -857,8 +867,24 @@ module.exports.payment = async (req, res) => {
             customer: customer.id
         });
     })
-        .then((charge) => {
-            res.send("Success")  // If no error occurs
+        .then(async (charge) => {
+            var productId = []
+            var cartId = []
+            cartData.map((v, i) => {
+                cartId.push({ id: v.id, status: "confirm" })
+                productId.push(v.productId.id)
+            })
+            req.body.cartId = cartId
+            req.body.productId = productId
+            req.body.userId = req.user.id;
+            req.body.status = "confirm"
+            var insertorder = await order.create(req.body);
+            if (insertorder) {
+                cartData.map(async (v, i) => {
+                    await cart.findByIdAndUpdate(v.id, { status: "confirm" })
+                })
+                return res.redirect("/") // If no error occurs
+            }
         })
         .catch((err) => {
             res.send(err)       // If some error occurs
