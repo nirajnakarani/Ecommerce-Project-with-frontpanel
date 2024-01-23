@@ -23,51 +23,39 @@ var path = require("path")
 var adminSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
     },
     email: {
         type: String,
-        required: true
     },
     password: {
         type: String,
-        required: true
     },
     description: {
         type: String,
-        required: true
     },
     city: {
         type: String,
-        required: true
     },
     gender: {
         type: String,
-        required: true
     },
     hobby: {
         type: Array,
-        required: true
     },
     admin_img: {
         type: String,
-        required: true
     },
     role: {
         type: String,
-        required: true
     },
     isActive: {
         type: Boolean,
-        required: true
     },
     createdDate: {
         type: String,
-        required: true
     },
     updatedDate: {
         type: String,
-        required: true
     }
 })
 

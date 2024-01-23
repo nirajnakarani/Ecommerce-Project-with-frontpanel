@@ -74,6 +74,11 @@ var passport = require("passport")
 var passportLocal = require("./configs/passport-local")
 
 
+// ----- passport google -----
+
+var google_auth = require("./configs/google-auth")
+
+
 // ----- session -----
 
 var session = require("express-session");

@@ -33,6 +33,16 @@ routes.get("/", adminController.login)
 routes.post("/login_admin", passport.authenticate("local", { failureRedirect: "/admin/" }), adminController.login_admin)
 
 
+// ----- login via google -----
+
+routes.get('/google', passport.authenticate('google', { scope: ['profile', "email"] }));
+
+
+// ----- login admin check google -----
+
+routes.get('/google/callback', passport.authenticate('google', { failureRedirect: '/admin/' }), adminController.login_admin)
+
+
 // ----- dashboard -----
 
 routes.get("/dashboard", passport.checkAuth, adminController.dashboard)
@@ -95,7 +105,7 @@ routes.get("/change_password", passport.checkAuth, adminController.change_passwo
 
 // ----- update password -----
 
-routes.post("/update_password",adminController.update_password)
+routes.post("/update_password", adminController.update_password)
 
 
 // ----- logout -----
